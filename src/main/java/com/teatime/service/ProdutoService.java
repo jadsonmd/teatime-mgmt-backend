@@ -2,6 +2,7 @@ package com.teatime.service;
 
 import com.teatime.dto.GerenciarEstoqueDTO;
 import com.teatime.dto.ProdutoItemDTO;
+import com.teatime.enums.TipoMovimentacao;
 import com.teatime.model.Produto;
 import com.teatime.model.ProdutoItem;
 import com.teatime.repository.ProdutoItemRepository;
@@ -20,6 +21,9 @@ public class ProdutoService {
 
     @Autowired
     private ProdutoItemRepository produtoItemRepository;
+
+    @Autowired
+    private TransferenciaEstoqueService transferenciaEstoqueService;
 
     public Produto createProduto(Produto produto) {
         produto.setEstoque(0);
@@ -67,6 +71,7 @@ public class ProdutoService {
                 produtoItem.setQuantidade(produtoItem.getQuantidade() + produtoDTO.getQtd());
                 produtoItem.setPrecoCompra(produtoDTO.getPrecoCompra());
                 produtoItemRepository.save(produtoItem);
+                transferenciaEstoqueService.createTransferenciaEstoque(produtoItem.getId(), 1l, produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA);
             });
 
             return optionalProduto.get();
@@ -86,12 +91,14 @@ public class ProdutoService {
         prodItem.setInUso(produtoDTO.getInUso());
 
         produtoItemRepository.save(prodItem);
+
+        transferenciaEstoqueService.createTransferenciaEstoque(prodItem.getId(), 1l, produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA);
+
         return optionalProduto.get();
     }
 
     public Produto baixarStock(GerenciarEstoqueDTO produtoDTO) {
         Optional<Produto> optionalProduto = produtoRepository.findById(produtoDTO.getIdProduto());
-
 
         optionalProduto.ifPresent(produto -> {
             if (produto.getEstoque() == 0 || (produto.getEstoque() - produtoDTO.getQtd()) < 0) {
@@ -104,6 +111,7 @@ public class ProdutoService {
                 }
                 produtoItem.setQuantidade(produtoItem.getQuantidade() - produtoDTO.getQtd());
                 produtoItemRepository.save(produtoItem);
+                transferenciaEstoqueService.createTransferenciaEstoque(produtoItem.getId(), 1l, produtoDTO.getQtd(), "Baixa de estoque", TipoMovimentacao.SAIDA);
             });
 
             produto.setEstoque(produto.getEstoque() - produtoDTO.getQtd());
