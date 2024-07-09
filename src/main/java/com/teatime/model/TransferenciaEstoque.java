@@ -2,8 +2,6 @@ package com.teatime.model;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-
 @Entity
 @Table(schema = "teatime", name = "transferencia_estoque")
 public class TransferenciaEstoque {
@@ -16,35 +14,26 @@ public class TransferenciaEstoque {
     @Column(name="ID_PRODUTO_ITEM", nullable = false)
     private String idProdutoItem;
 
-    @Column(name="ID_UNIDADE_ORIGEM", nullable = true)
-    private Long idUnidadeOrigem;
-
-    @Column(name="ID_UNIDADE_DESTINO", nullable = false)
-    private Long idUnidadeDestino;
+    @Column(name="ID_UNIDADE", nullable = false)
+    private Long idUnidade;
 
     @Column(name="QUANTIDADE", nullable = false)
     private Integer quantidade;
 
-    @Column(name = "DATA_TRANSFERENCIA", nullable = false)
-    private Date dataTransferencia;
+    @Column(name="ID_PARCEIRO", nullable = false)
+    private String idParceiro;
 
-    @Column(name="OBSERVACAO", nullable = true)
-    private String observacao;
-
-    @Column(name = "TIPO_MOVIMENTACAO", nullable = false)
-    private String tipoMovimentacao;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="ID_PARCEIRO", updatable=false, insertable=false, foreignKey = @ForeignKey(name = "FK_TRANSFERENCIA_ESTOQUE_PARCEIRO"))
+    private Parceiro parceiro;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="ID_PRODUTO_ITEM", updatable=false, insertable=false, foreignKey = @ForeignKey(name = "FK_TRANSFERENCIA_ESTOQUE_PRODUTO_ITEM"))
     private ProdutoItem produtoItem;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="ID_UNIDADE_ORIGEM", updatable=false, insertable=false, foreignKey = @ForeignKey(name = "FK_TRANSFERENCIA_ESTOQUE_UNIDADE_ORIGEM"))
-    private Unidade unidadeOrigem;
-
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="ID_UNIDADE_DESTINO", updatable=false, insertable=false, foreignKey = @ForeignKey(name = "FK_TRANSFERENCIA_ESTOQUE_UNIDADE_DESTINO"))
-    private Unidade unidadeDestino;
+    @JoinColumn(name="ID_UNIDADE", updatable=false, insertable=false, foreignKey = @ForeignKey(name = "FK_TRANSFERENCIA_ESTOQUE_UNIDADE"))
+    private Unidade unidade;
 
     public String getId() {
         return id;
@@ -62,20 +51,12 @@ public class TransferenciaEstoque {
         this.idProdutoItem = idProdutoItem;
     }
 
-    public Long getIdUnidadeOrigem() {
-        return idUnidadeOrigem;
+    public Long getIdUnidade() {
+        return idUnidade;
     }
 
-    public void setIdUnidadeOrigem(Long idUnidadeOrigem) {
-        this.idUnidadeOrigem = idUnidadeOrigem;
-    }
-
-    public Long getIdUnidadeDestino() {
-        return idUnidadeDestino;
-    }
-
-    public void setIdUnidadeDestino(Long idUnidadeDestino) {
-        this.idUnidadeDestino = idUnidadeDestino;
+    public void setIdUnidade(Long idUnidade) {
+        this.idUnidade = idUnidade;
     }
 
     public Integer getQuantidade() {
@@ -86,20 +67,20 @@ public class TransferenciaEstoque {
         this.quantidade = quantidade;
     }
 
-    public Date getDataTransferencia() {
-        return dataTransferencia;
+    public String getIdParceiro() {
+        return idParceiro;
     }
 
-    public void setDataTransferencia(Date dataTransferencia) {
-        this.dataTransferencia = dataTransferencia;
+    public void setIdParceiro(String idParceiro) {
+        this.idParceiro = idParceiro;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public Parceiro getParceiro() {
+        return parceiro;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
+    public void setParceiro(Parceiro parceiro) {
+        this.parceiro = parceiro;
     }
 
     public ProdutoItem getProdutoItem() {
@@ -110,28 +91,11 @@ public class TransferenciaEstoque {
         this.produtoItem = produtoItem;
     }
 
-    public Unidade getUnidadeOrigem() {
-        return unidadeOrigem;
+    public Unidade getUnidade() {
+        return unidade;
     }
 
-    public void setUnidadeOrigem(Unidade unidadeOrigem) {
-        this.unidadeOrigem = unidadeOrigem;
+    public void setUnidade(Unidade unidade) {
+        this.unidade = unidade;
     }
-
-    public Unidade getUnidadeDestino() {
-        return unidadeDestino;
-    }
-
-    public void setUnidadeDestino(Unidade unidadeDestino) {
-        this.unidadeDestino = unidadeDestino;
-    }
-
-    public String getTipoMovimentacao() {
-        return tipoMovimentacao;
-    }
-
-    public void setTipoMovimentacao(String tipoMovimentacao) {
-        this.tipoMovimentacao = tipoMovimentacao;
-    }
-
 }

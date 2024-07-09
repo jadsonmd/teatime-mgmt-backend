@@ -3,9 +3,14 @@ package com.teatime.controller;
 import com.okta.spring.boot.oauth.config.OktaOAuth2Properties;
 import com.teatime.dto.GerenciarEstoqueDTO;
 import com.teatime.dto.ProdutoItemDTO;
+import com.teatime.dto.ReceberEstoqueDTO;
+import com.teatime.dto.TransferirEstoqueDTO;
 import com.teatime.model.Produto;
 import com.teatime.model.ProdutoItem;
+import com.teatime.model.TransferenciaEstoque;
+import com.teatime.model.TransferenciaEstoqueDetalhe;
 import com.teatime.service.ProdutoService;
+import com.teatime.service.TransferenciaEstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +30,9 @@ public class ProdutoController {
 
     @Autowired
     private ApplicationContext context;
+
+    @Autowired
+    private TransferenciaEstoqueService transferenciaEstoqueService;
 
     @CrossOrigin
     @PostMapping
@@ -76,4 +84,25 @@ public class ProdutoController {
     public Produto baixarStock(@RequestBody GerenciarEstoqueDTO produtoDTO) {
         return produtoService.baixarStock(produtoDTO);
     }
+
+    @GetMapping("lista-trasferecia-stock")
+    public List<TransferenciaEstoque> getAllTransferenciaStock() {
+        return transferenciaEstoqueService.getAllTransferenciaStock();
+    }
+
+    @GetMapping("lista-trasferecia-stock-pendente-recebimento")
+    public List<TransferenciaEstoqueDetalhe> getAllTransferenciaStockPendenteRecebimento() {
+        return transferenciaEstoqueService.getAllTransferenciaStockPendenteRecebimento();
+    }
+
+    @PostMapping("transferir-stock")
+    public TransferenciaEstoque transferirStock(@RequestBody TransferirEstoqueDTO transferirEstoqueDTO) {
+        return transferenciaEstoqueService.transferirStock(transferirEstoqueDTO);
+    }
+
+    @PostMapping("receber-stock")
+    public TransferenciaEstoque receberStock(@RequestBody ReceberEstoqueDTO receberEstoqueDTO) {
+        return transferenciaEstoqueService.receberStock(receberEstoqueDTO);
+    }
+
 }

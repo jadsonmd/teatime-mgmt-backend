@@ -2,11 +2,13 @@ package com.teatime.service;
 
 import com.teatime.dto.GerenciarEstoqueDTO;
 import com.teatime.dto.ProdutoItemDTO;
+import com.teatime.dto.TransferenciaEstoqueDTO;
 import com.teatime.enums.TipoMovimentacao;
 import com.teatime.model.Produto;
 import com.teatime.model.ProdutoItem;
 import com.teatime.repository.ProdutoItemRepository;
 import com.teatime.repository.ProdutoRepository;
+import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import java.util.Optional;
 
 @Service
 public class ProdutoService {
+
+    private static final String ID_PARCEIRO = "santo-antonio";
 
     @Autowired
     private ProdutoRepository produtoRepository;
@@ -71,7 +75,7 @@ public class ProdutoService {
                 produtoItem.setQuantidade(produtoItem.getQuantidade() + produtoDTO.getQtd());
                 produtoItem.setPrecoCompra(produtoDTO.getPrecoCompra());
                 produtoItemRepository.save(produtoItem);
-                transferenciaEstoqueService.createTransferenciaEstoque(produtoItem.getId(), 1l, produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA);
+                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(ID_PARCEIRO, produtoItem.getId(), "auth0|66579aa58313fe1b68ee0008", 1l, produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA));
             });
 
             return optionalProduto.get();
@@ -92,7 +96,7 @@ public class ProdutoService {
 
         produtoItemRepository.save(prodItem);
 
-        transferenciaEstoqueService.createTransferenciaEstoque(prodItem.getId(), 1l, produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA);
+        transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(ID_PARCEIRO, prodItem.getId(), "auth0|66579aa58313fe1b68ee0008", 1l, produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA));
 
         return optionalProduto.get();
     }
@@ -111,7 +115,7 @@ public class ProdutoService {
                 }
                 produtoItem.setQuantidade(produtoItem.getQuantidade() - produtoDTO.getQtd());
                 produtoItemRepository.save(produtoItem);
-                transferenciaEstoqueService.createTransferenciaEstoque(produtoItem.getId(), 1l, produtoDTO.getQtd(), "Baixa de estoque", TipoMovimentacao.SAIDA);
+                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(ID_PARCEIRO, produtoItem.getId(),"auth0|66579aa58313fe1b68ee0008", 1l, produtoDTO.getQtd(), "Baixa de estoque", TipoMovimentacao.SAIDA));
             });
 
             produto.setEstoque(produto.getEstoque() - produtoDTO.getQtd());

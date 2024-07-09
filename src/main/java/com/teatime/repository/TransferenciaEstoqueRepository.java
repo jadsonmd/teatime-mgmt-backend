@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface TransferenciaEstoqueRepository extends JpaRepository<TransferenciaEstoque, String> {
 
-    Optional<TransferenciaEstoque> findByIdUnidadeDestino(Long idUnidadeDestino);
+    Optional<TransferenciaEstoque> findByIdParceiroAndIdProdutoItemAndIdUnidade(String idParceiro, String idProdutoItem, Long idUnidadeDestino);
 }
