@@ -8,7 +8,6 @@ import com.teatime.model.Produto;
 import com.teatime.model.ProdutoItem;
 import com.teatime.repository.ProdutoItemRepository;
 import com.teatime.repository.ProdutoRepository;
-import org.aspectj.weaver.NewConstructorTypeMunger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
