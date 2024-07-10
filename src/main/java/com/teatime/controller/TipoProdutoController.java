@@ -30,7 +30,7 @@ public class TipoProdutoController {
         return tipoProdutoService.getAllTipoProdutos(idParceiro);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public TipoProduto updateTipoProduto(@RequestBody TipoProduto tipoProduto) {
         return tipoProdutoService.updateTipoProduto(tipoProduto);
     }

@@ -30,7 +30,7 @@ public class EspecieProdutoController {
         return especieProdutoService.getAllEspecieProdutos(idParceiro);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public EspecieProduto updateEspecieProduto( @RequestBody EspecieProduto especieProduto) {
         return especieProdutoService.updateEspecieProduto(especieProduto);
     }
