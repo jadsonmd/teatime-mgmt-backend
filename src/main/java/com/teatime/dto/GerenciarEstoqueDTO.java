@@ -13,6 +13,9 @@ public class GerenciarEstoqueDTO {
     private Date dataValidade;
     private Boolean inUso;
 
+    private String idUsuarioRecebeu;
+    private Long idUnidadeDestino;
+
     public Date getDataValidade() {
         return dataValidade;
     }
@@ -67,5 +70,21 @@ public class GerenciarEstoqueDTO {
 
     public void setIdProdutoItem(String idProdutoItem) {
         this.idProdutoItem = idProdutoItem;
+    }
+
+    public String getIdUsuarioRecebeu() {
+        return idUsuarioRecebeu;
+    }
+
+    public void setIdUsuarioRecebeu(String idUsuarioRecebeu) {
+        this.idUsuarioRecebeu = idUsuarioRecebeu;
+    }
+
+    public Long getIdUnidadeDestino() {
+        return idUnidadeDestino;
+    }
+
+    public void setIdUnidadeDestino(Long idUnidadeDestino) {
+        this.idUnidadeDestino = idUnidadeDestino;
     }
 }

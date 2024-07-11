@@ -74,7 +74,7 @@ public class ProdutoService {
                 produtoItem.setQuantidade(produtoItem.getQuantidade() + produtoDTO.getQtd());
                 produtoItem.setPrecoCompra(produtoDTO.getPrecoCompra());
                 produtoItemRepository.save(produtoItem);
-                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(ID_PARCEIRO, produtoItem.getId(), "auth0|66579aa58313fe1b68ee0008", 1l, produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA));
+                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(ID_PARCEIRO, produtoItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA));
             });
 
             return optionalProduto.get();
@@ -95,7 +95,7 @@ public class ProdutoService {
 
         produtoItemRepository.save(prodItem);
 
-        transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(ID_PARCEIRO, prodItem.getId(), "auth0|66579aa58313fe1b68ee0008", 1l, produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA));
+        transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(ID_PARCEIRO, prodItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA));
 
         return optionalProduto.get();
     }
@@ -114,7 +114,7 @@ public class ProdutoService {
                 }
                 produtoItem.setQuantidade(produtoItem.getQuantidade() - produtoDTO.getQtd());
                 produtoItemRepository.save(produtoItem);
-                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(ID_PARCEIRO, produtoItem.getId(),"auth0|66579aa58313fe1b68ee0008", 1l, produtoDTO.getQtd(), "Baixa de estoque", TipoMovimentacao.SAIDA));
+                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(ID_PARCEIRO, produtoItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), "Baixa de estoque", TipoMovimentacao.SAIDA));
             });
 
             produto.setEstoque(produto.getEstoque() - produtoDTO.getQtd());

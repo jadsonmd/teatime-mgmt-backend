@@ -28,13 +28,21 @@ public class TransferenciaEstoqueService {
 
         Optional<TransferenciaEstoque> transferenciaEstoque = null;
         if (TipoMovimentacao.SAIDA.name().equals(transferenciaEstoqueDTO.getTpMovimentacao().name())) {
-            transferenciaEstoque = transferenciaEstoqueRepository.
-                    findByIdParceiroAndIdProdutoItemAndIdUnidade(
-                            transferenciaEstoqueDTO.getIdParceiro(),
-                            transferenciaEstoqueDTO.getIdProdutoItem(),
-                            transferenciaEstoqueDTO.getIdUnidadeOrigem()
-                    );
-
+            if (transferenciaEstoqueDTO.getIdUnidadeOrigem() == null) {
+                transferenciaEstoque = transferenciaEstoqueRepository.
+                        findByIdParceiroAndIdProdutoItemAndIdUnidade(
+                                transferenciaEstoqueDTO.getIdParceiro(),
+                                transferenciaEstoqueDTO.getIdProdutoItem(),
+                                transferenciaEstoqueDTO.getIdUnidadeDestino()
+                        );
+            } else {
+                transferenciaEstoque = transferenciaEstoqueRepository.
+                        findByIdParceiroAndIdProdutoItemAndIdUnidade(
+                                transferenciaEstoqueDTO.getIdParceiro(),
+                                transferenciaEstoqueDTO.getIdProdutoItem(),
+                                transferenciaEstoqueDTO.getIdUnidadeOrigem()
+                        );
+            }
         } else {
             transferenciaEstoque = transferenciaEstoqueRepository.
                     findByIdParceiroAndIdProdutoItemAndIdUnidade(
@@ -134,8 +142,7 @@ public class TransferenciaEstoqueService {
     }
 
     public List<TransferenciaEstoque> getAllTransferenciaStock() {
-
-        return transferenciaEstoqueRepository.findAll();
+        return transferenciaEstoqueRepository.findByOrderByIdProdutoItemAscIdUnidadeAsc();
     }
 
     public List<TransferenciaEstoqueDetalhe> getAllTransferenciaStockPendenteRecebimento() {

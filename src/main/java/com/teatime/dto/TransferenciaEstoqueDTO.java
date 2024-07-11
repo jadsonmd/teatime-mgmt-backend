@@ -18,7 +18,7 @@ public class TransferenciaEstoqueDTO {
     public TransferenciaEstoqueDTO() {
     }
 
-    public TransferenciaEstoqueDTO(String idParceiro, String idProdutoItem, String idUsuarioRecebeu, long idUnidadeDestino, Integer quantidade, String observacao, TipoMovimentacao tipoMovimentacao) {
+    public TransferenciaEstoqueDTO(String idParceiro, String idProdutoItem, String idUsuarioRecebeu, Long idUnidadeDestino, Integer quantidade, String observacao, TipoMovimentacao tipoMovimentacao) {
         this.idParceiro = idParceiro;
         this.idProdutoItem = idProdutoItem;
         this.idUsuarioRecebeu = idUsuarioRecebeu;
