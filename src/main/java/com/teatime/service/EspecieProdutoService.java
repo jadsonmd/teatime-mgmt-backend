@@ -17,7 +17,7 @@ public class EspecieProdutoService {
         return especieProdutoRepository.save(especieProduto);
     }
 
-    public EspecieProduto getEspecieProduto(Long id) {
+    public EspecieProduto getEspecieProduto(String id) {
         return especieProdutoRepository.findById(id).orElse(null);
     }
 
@@ -29,7 +29,7 @@ public class EspecieProdutoService {
         return especieProdutoRepository.save(especieProduto);
     }
 
-    public void deleteEspecieProduto(Long id) {
+    public void deleteEspecieProduto(String id) {
         especieProdutoRepository.deleteById(id);
     }
 }

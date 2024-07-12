@@ -17,7 +17,7 @@ public class TipoProdutoService {
         return tipoProdutoRepository.save(tipoProduto);
     }
 
-    public TipoProduto getTipoProduto(Long id) {
+    public TipoProduto getTipoProduto(String id) {
         return tipoProdutoRepository.findById(id).orElse(null);
     }
 
@@ -29,7 +29,7 @@ public class TipoProdutoService {
         return tipoProdutoRepository.save(tipoProduto);
     }
 
-    public void deleteTipoProduto(Long id) {
+    public void deleteTipoProduto(String id) {
         tipoProdutoRepository.deleteById(id);
     }
 }

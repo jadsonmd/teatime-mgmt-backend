@@ -10,8 +10,9 @@ import java.util.List;
 public interface TransferenciaEstoqueDetalheRepository extends JpaRepository<TransferenciaEstoqueDetalhe, String> {
 
     @Query(value = "FROM TransferenciaEstoqueDetalhe detalhe " +
-            "WHERE detalhe.tipoMovimentacao = :tipoMovimentacao " +
+            "JOIN detalhe.transferenciaEstoque transf " +
+            "WHERE transf.idParceiro = :idParceiro AND detalhe.tipoMovimentacao = :tipoMovimentacao " +
             "AND detalhe.idUnidadeOrigem IS NOT NULL " +
             "AND detalhe.idUsuarioRecebeu IS NULL " )
-    List<TransferenciaEstoqueDetalhe> findAllTransferenciaStockPendenteRecebimento(@PathVariable("tipoMovimentacao") String tipoMovimentacao);
+    List<TransferenciaEstoqueDetalhe> findAllTransferenciaStockPendenteRecebimento(@PathVariable("idParceiro")String idParceiro, @PathVariable("tipoMovimentacao") String tipoMovimentacao);
 }

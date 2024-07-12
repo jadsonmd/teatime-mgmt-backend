@@ -21,7 +21,7 @@ public class EspecieProdutoController {
     }
 
     @GetMapping("/{id}")
-    public EspecieProduto getEspecieProduto(@PathVariable Long id) {
+    public EspecieProduto getEspecieProduto(@PathVariable String id) {
         return especieProdutoService.getEspecieProduto(id);
     }
 
@@ -36,7 +36,7 @@ public class EspecieProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteEspecieProduto(@PathVariable Long id) {
+    public void deleteEspecieProduto(@PathVariable String id) {
         especieProdutoService.deleteEspecieProduto(id);
     }
 }

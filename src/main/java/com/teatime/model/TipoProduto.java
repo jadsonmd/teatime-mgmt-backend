@@ -7,9 +7,9 @@ import jakarta.persistence.*;
 public class TipoProduto {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name="ID", nullable = false)
-    private Long id;
+    @Column(name="ID")
+    @GeneratedValue(strategy=GenerationType.UUID)
+    private String id;
 
     @Column(name="NAME", nullable = false)
     private String name;
@@ -21,11 +21,11 @@ public class TipoProduto {
     @JoinColumn(name="ID_PARCEIRO", updatable=false, insertable=false, foreignKey = @ForeignKey(name = "FK_TIPO_PRODUTO_PARCEIRO"))
     private Parceiro parceiro;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

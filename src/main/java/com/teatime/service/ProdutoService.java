@@ -37,12 +37,12 @@ public class ProdutoService {
         return produtoRepository.findById(id).orElse(null);
     }
 
-    public List<Produto> getAllProdutos() {
-        return produtoRepository.findAll();
+    public List<Produto> getAllProdutos(String idParceiro) {
+        return produtoRepository.findByIdParceiroOrderByNomeAsc(idParceiro);
     }
 
-    public List<ProdutoItemDTO> getAllProdutoComItens() {
-        return produtoItemRepository.getAllProdutoComItens();
+    public List<ProdutoItemDTO> getAllProdutoComItens(String idParceiro) {
+        return produtoItemRepository.getAllProdutoComItens(idParceiro);
     }
 
     public Produto updateProduto(Produto produto) {

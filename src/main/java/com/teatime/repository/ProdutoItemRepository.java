@@ -4,6 +4,7 @@ import com.teatime.dto.ProdutoItemDTO;
 import com.teatime.model.ProdutoItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 import java.util.List;
@@ -26,7 +27,8 @@ public interface ProdutoItemRepository extends JpaRepository<ProdutoItem, String
             " pi.dataValidade as dataValidade," +
             " pi.inUso as inUso" +
             " FROM Produto p LEFT JOIN ProdutoItem pi ON pi.idProduto = p.id" +
+            " WHERE p.idParceiro = :idParceiro" +
             " ORDER BY p.nome, p.codigo DESC")
-    List<ProdutoItemDTO> getAllProdutoComItens();
+    List<ProdutoItemDTO> getAllProdutoComItens(@PathVariable("idParceiro") String idParceiro);
 
 }

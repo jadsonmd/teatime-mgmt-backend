@@ -141,11 +141,11 @@ public class TransferenciaEstoqueService {
         return transferenciaEstoqueDetalheOptional.get().getTransferenciaEstoque();
     }
 
-    public List<TransferenciaEstoque> getAllTransferenciaStock() {
-        return transferenciaEstoqueRepository.findByOrderByIdProdutoItemAscIdUnidadeAsc();
+    public List<TransferenciaEstoque> getAllTransferenciaStock(String idParceiro) {
+        return transferenciaEstoqueRepository.findByIdParceiroOrderByIdProdutoItemAscIdUnidadeAsc(idParceiro);
     }
 
-    public List<TransferenciaEstoqueDetalhe> getAllTransferenciaStockPendenteRecebimento() {
-        return transferenciaEstoqueDetalheRepository.findAllTransferenciaStockPendenteRecebimento(TipoMovimentacao.SAIDA.name());
+    public List<TransferenciaEstoqueDetalhe> getAllTransferenciaStockPendenteRecebimento(String idParceiro) {
+        return transferenciaEstoqueDetalheRepository.findAllTransferenciaStockPendenteRecebimento(idParceiro, TipoMovimentacao.SAIDA.name());
     }
 }

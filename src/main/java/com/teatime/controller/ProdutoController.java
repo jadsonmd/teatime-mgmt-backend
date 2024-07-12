@@ -46,15 +46,15 @@ public class ProdutoController {
     }
 
     @CrossOrigin
-    @GetMapping
-    public List<Produto> getAllProdutos() {
-        return produtoService.getAllProdutos();
+    @GetMapping("idParceiro/{idParceiro}")
+    public List<Produto> getAllProdutos(@PathVariable String idParceiro) {
+        return produtoService.getAllProdutos(idParceiro);
     }
 
     @CrossOrigin
-    @GetMapping("/lista-produto-com-itens")
-    public List<ProdutoItemDTO> getAllProdutoComItens() {
-        return produtoService.getAllProdutoComItens();
+    @GetMapping("/lista-produto-com-itens/idParceiro/{idParceiro}")
+    public List<ProdutoItemDTO> getAllProdutoComItens(@PathVariable String idParceiro) {
+        return produtoService.getAllProdutoComItens(idParceiro);
     }
 
     @CrossOrigin
@@ -85,14 +85,14 @@ public class ProdutoController {
         return produtoService.baixarStock(produtoDTO);
     }
 
-    @GetMapping("lista-trasferecia-stock")
-    public List<TransferenciaEstoque> getAllTransferenciaStock() {
-        return transferenciaEstoqueService.getAllTransferenciaStock();
+    @GetMapping("lista-trasferecia-stock/idParceiro/{idParceiro}")
+    public List<TransferenciaEstoque> getAllTransferenciaStock(@PathVariable String idParceiro) {
+        return transferenciaEstoqueService.getAllTransferenciaStock(idParceiro);
     }
 
-    @GetMapping("lista-trasferecia-stock-pendente-recebimento")
-    public List<TransferenciaEstoqueDetalhe> getAllTransferenciaStockPendenteRecebimento() {
-        return transferenciaEstoqueService.getAllTransferenciaStockPendenteRecebimento();
+    @GetMapping("lista-trasferecia-stock-pendente-recebimento/idParceiro/{idParceiro}")
+    public List<TransferenciaEstoqueDetalhe> getAllTransferenciaStockPendenteRecebimento(@PathVariable String idParceiro) {
+        return transferenciaEstoqueService.getAllTransferenciaStockPendenteRecebimento(idParceiro);
     }
 
     @PostMapping("transferir-stock")

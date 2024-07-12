@@ -10,6 +10,6 @@ public interface TransferenciaEstoqueRepository extends JpaRepository<Transferen
 
     Optional<TransferenciaEstoque> findByIdParceiroAndIdProdutoItemAndIdUnidade(String idParceiro, String idProdutoItem, Long idUnidadeDestino);
 
-    List<TransferenciaEstoque> findByOrderByIdProdutoItemAscIdUnidadeAsc();
+    List<TransferenciaEstoque> findByIdParceiroOrderByIdProdutoItemAscIdUnidadeAsc(String idParceiro);
 
 }

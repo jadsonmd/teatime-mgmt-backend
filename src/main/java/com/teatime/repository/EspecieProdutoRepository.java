@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-public interface EspecieProdutoRepository  extends JpaRepository<EspecieProduto, Long> {
+public interface EspecieProdutoRepository  extends JpaRepository<EspecieProduto, String> {
 
     List<EspecieProduto> findAllByIdParceiro(@PathVariable String idParceiro);
 

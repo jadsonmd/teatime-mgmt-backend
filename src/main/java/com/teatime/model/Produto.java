@@ -38,10 +38,10 @@ public class Produto {
     private String idParceiro;
 
     @Column(name="ID_TIPO_PRODUTO")
-    private Long idTipoProduto;
+    private String idTipoProduto;
 
     @Column(name="ID_ESPECIE_PRODUTO")
-    private Long idEspecieProduto;
+    private String idEspecieProduto;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="ID_PARCEIRO", updatable=false, insertable=false, foreignKey = @ForeignKey(name = "FK_PRODUTO_PARCEIRO"))
@@ -103,11 +103,11 @@ public class Produto {
         this.id = id;
     }
 
-    public Long getIdEspecieProduto() {
+    public String getIdEspecieProduto() {
         return idEspecieProduto;
     }
 
-    public void setIdEspecieProduto(Long idEspecieProduto) {
+    public void setIdEspecieProduto(String idEspecieProduto) {
         this.idEspecieProduto = idEspecieProduto;
     }
 
@@ -119,11 +119,11 @@ public class Produto {
         this.idParceiro = idParceiro;
     }
 
-    public Long getIdTipoProduto() {
+    public String getIdTipoProduto() {
         return idTipoProduto;
     }
 
-    public void setIdTipoProduto(Long idTipoProduto) {
+    public void setIdTipoProduto(String idTipoProduto) {
         this.idTipoProduto = idTipoProduto;
     }
 

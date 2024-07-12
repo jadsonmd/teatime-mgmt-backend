@@ -12,8 +12,8 @@ public interface ProdutoItemDTO {
     Integer getEstoqueMin();
     Integer getEstoqueMax();
     Integer getEstoque();
-    Long getIdTipoProduto();
-    Long getIdEspecieProduto();
+    String getIdTipoProduto();
+    String getIdEspecieProduto();
 
     String getIdProdutoItem();
     String getLote();

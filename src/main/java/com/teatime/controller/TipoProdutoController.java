@@ -21,7 +21,7 @@ public class TipoProdutoController {
     }
 
     @GetMapping("/{id}")
-    public TipoProduto getTipoProduto(@PathVariable Long id) {
+    public TipoProduto getTipoProduto(@PathVariable String id) {
         return tipoProdutoService.getTipoProduto(id);
     }
 
@@ -36,7 +36,7 @@ public class TipoProdutoController {
     }
 
     @DeleteMapping("/{id}")
-    public void updateTipoProduto(@PathVariable Long id) {
+    public void updateTipoProduto(@PathVariable String id) {
         tipoProdutoService.deleteTipoProduto(id);
     }
 }
