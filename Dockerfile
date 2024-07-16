@@ -1,8 +1,8 @@
 FROM maven:3.8.4-openjdk-17-slim as builder
 WORKDIR /teatime
-COPY src /usr/teatime/src
-COPY pom.xml /usr/teatime
-RUN mvn -f /usr/teatime/pom.xml clean package -DskipTests -Pstage
+COPY src /usr/teatime/teatime-mgmt-backend/src
+COPY pom.xml /usr/teatime/teatime-mgmt-backend
+RUN mvn -f /usr/teatime/teatime-mgmt-backend/pom.xml clean package -DskipTests -Pstage
 
 FROM openjdk:17-jdk-oraclelinux7
 
@@ -14,6 +14,6 @@ ENV AUTH_AUDIENCE=audience
 ENV AUTH_CLIENT_ID=client_id
 ENV AUTH_CLIENT_SECRET=client_secret
 
-COPY --from=builder /usr/teatime/target/teatime-0.0.1-SNAPSHOT.jar /usr/local/teatime.jar
+COPY --from=builder /usr/teatime/teatime-mgmt-backend/target/teatime-mgmt-backend-0.0.1-SNAPSHOT.jar /usr/local/teatime-mgmt-backend.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/local/teatime.jar"]
+ENTRYPOINT ["java","-jar","/usr/local/teatime-mgmt-backend.jar"]
