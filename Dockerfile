@@ -2,7 +2,7 @@ FROM maven:3.8.4-openjdk-17-slim as builder
 WORKDIR /teatime
 COPY src /usr/teatime/teatime-mgmt-backend/src
 COPY pom.xml /usr/teatime/teatime-mgmt-backend
-RUN mvn -f /usr/teatime/teatime-mgmt-backend/pom.xml clean package -DskipTests -Pstage
+RUN mvn -f /usr/teatime/teatime-mgmt-backend/pom.xml clean package -DskipTests -Pproduction
 
 FROM openjdk:17-jdk-oraclelinux7
 
