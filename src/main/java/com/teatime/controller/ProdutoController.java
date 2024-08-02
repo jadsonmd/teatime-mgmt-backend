@@ -26,12 +26,6 @@ public class ProdutoController {
     private ProdutoService produtoService;
 
     @Autowired
-    private OktaOAuth2Properties oktaOAuth2Properties;
-
-    @Autowired
-    private ApplicationContext context;
-
-    @Autowired
     private TransferenciaEstoqueService transferenciaEstoqueService;
 
     @CrossOrigin
@@ -40,6 +34,7 @@ public class ProdutoController {
         return produtoService.createProduto(produto);
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public Produto getProduto(@PathVariable String id) {
         return produtoService.getProduto(id);
@@ -75,31 +70,37 @@ public class ProdutoController {
         produtoService.deleteProduto(id);
     }
 
+    @CrossOrigin
     @PostMapping("incluir-stock")
     public Produto incluirStock(@RequestBody GerenciarEstoqueDTO produtoDTO) {
         return produtoService.incluirStock(produtoDTO);
     }
 
+    @CrossOrigin
     @PostMapping("baixar-stock")
     public Produto baixarStock(@RequestBody GerenciarEstoqueDTO produtoDTO) {
         return produtoService.baixarStock(produtoDTO);
     }
 
+    @CrossOrigin
     @GetMapping("lista-trasferecia-stock/idParceiro/{idParceiro}")
     public List<TransferenciaEstoque> getAllTransferenciaStock(@PathVariable String idParceiro) {
         return transferenciaEstoqueService.getAllTransferenciaStock(idParceiro);
     }
 
+    @CrossOrigin
     @GetMapping("lista-trasferecia-stock-pendente-recebimento/idParceiro/{idParceiro}")
     public List<TransferenciaEstoqueDetalhe> getAllTransferenciaStockPendenteRecebimento(@PathVariable String idParceiro) {
         return transferenciaEstoqueService.getAllTransferenciaStockPendenteRecebimento(idParceiro);
     }
 
+    @CrossOrigin
     @PostMapping("transferir-stock")
     public TransferenciaEstoque transferirStock(@RequestBody TransferirEstoqueDTO transferirEstoqueDTO) {
         return transferenciaEstoqueService.transferirStock(transferirEstoqueDTO);
     }
 
+    @CrossOrigin
     @PostMapping("receber-stock")
     public TransferenciaEstoque receberStock(@RequestBody ReceberEstoqueDTO receberEstoqueDTO) {
         return transferenciaEstoqueService.receberStock(receberEstoqueDTO);
