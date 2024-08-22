@@ -1,6 +1,5 @@
 package com.teatime.controller;
 
-import com.okta.spring.boot.oauth.config.OktaOAuth2Properties;
 import com.teatime.dto.GerenciarEstoqueDTO;
 import com.teatime.dto.ProdutoItemDTO;
 import com.teatime.dto.ReceberEstoqueDTO;
@@ -12,12 +11,10 @@ import com.teatime.model.TransferenciaEstoqueDetalhe;
 import com.teatime.service.ProdutoService;
 import com.teatime.service.TransferenciaEstoqueService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/produtos")
 public class ProdutoController {
@@ -28,79 +25,66 @@ public class ProdutoController {
     @Autowired
     private TransferenciaEstoqueService transferenciaEstoqueService;
 
-    @CrossOrigin
     @PostMapping
     public Produto createProduto(@RequestBody Produto produto) {
         return produtoService.createProduto(produto);
     }
 
-    @CrossOrigin
     @GetMapping("/{id}")
     public Produto getProduto(@PathVariable String id) {
         return produtoService.getProduto(id);
     }
 
-    @CrossOrigin
     @GetMapping("idParceiro/{idParceiro}")
     public List<Produto> getAllProdutos(@PathVariable String idParceiro) {
         return produtoService.getAllProdutos(idParceiro);
     }
 
-    @CrossOrigin
     @GetMapping("/lista-produto-com-itens/idParceiro/{idParceiro}")
     public List<ProdutoItemDTO> getAllProdutoComItens(@PathVariable String idParceiro) {
         return produtoService.getAllProdutoComItens(idParceiro);
     }
 
-    @CrossOrigin
     @GetMapping("/produto-itens/{idProduto}")
     public List<ProdutoItem> getAllProdutoItem(@PathVariable String idProduto) {
         return produtoService.getAllProdutoItem(idProduto);
     }
 
-    @CrossOrigin
     @PutMapping
     public Produto updateProduto(@RequestBody Produto produto) {
         return produtoService.updateProduto(produto);
     }
 
-    @CrossOrigin
     @DeleteMapping("/{id}")
     public void deleteProduto(@PathVariable String id) {
         produtoService.deleteProduto(id);
     }
 
-    @CrossOrigin
     @PostMapping("incluir-stock")
     public Produto incluirStock(@RequestBody GerenciarEstoqueDTO produtoDTO) {
         return produtoService.incluirStock(produtoDTO);
     }
 
-    @CrossOrigin
     @PostMapping("baixar-stock")
     public Produto baixarStock(@RequestBody GerenciarEstoqueDTO produtoDTO) {
         return produtoService.baixarStock(produtoDTO);
     }
 
-    @CrossOrigin
     @GetMapping("lista-trasferecia-stock/idParceiro/{idParceiro}")
     public List<TransferenciaEstoque> getAllTransferenciaStock(@PathVariable String idParceiro) {
         return transferenciaEstoqueService.getAllTransferenciaStock(idParceiro);
     }
 
-    @CrossOrigin
     @GetMapping("lista-trasferecia-stock-pendente-recebimento/idParceiro/{idParceiro}")
     public List<TransferenciaEstoqueDetalhe> getAllTransferenciaStockPendenteRecebimento(@PathVariable String idParceiro) {
         return transferenciaEstoqueService.getAllTransferenciaStockPendenteRecebimento(idParceiro);
     }
 
-    @CrossOrigin
     @PostMapping("transferir-stock")
     public TransferenciaEstoque transferirStock(@RequestBody TransferirEstoqueDTO transferirEstoqueDTO) {
         return transferenciaEstoqueService.transferirStock(transferirEstoqueDTO);
     }
 
-    @CrossOrigin
     @PostMapping("receber-stock")
     public TransferenciaEstoque receberStock(@RequestBody ReceberEstoqueDTO receberEstoqueDTO) {
         return transferenciaEstoqueService.receberStock(receberEstoqueDTO);

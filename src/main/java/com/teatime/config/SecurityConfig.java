@@ -16,10 +16,12 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/api/public").permitAll()
-                        .requestMatchers("/api/teatime", "/callback").authenticated()
-                        .requestMatchers("/api/teatime/prod").hasAuthority("SCOPE_read:messages")
+                        .requestMatchers("/api/teatime").authenticated()
+//                        .requestMatchers("/api/teatime/prod").hasAuthority("SCOPE_read:messages")
                 )
+                .oauth2Login(Customizer.withDefaults())
                 .cors(Customizer.withDefaults())
+//                .portMapper(portMapper -> portMapper.http(8080).mapsTo(8080))
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
 //                .oauth2Login(oauth2 -> oauth2
 //                        .authorizationEndpoint(authorization -> authorization.baseUri("/authorize"))
@@ -29,6 +31,5 @@ public class SecurityConfig {
 //                )
                 .build();
     }
-
 
 }
