@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(schema = "teatime", name = "produtos")
+@Table(schema = "teatime", name = "produtos", uniqueConstraints = {
+        @UniqueConstraint(name = "UK_CODIGO_IDPARCEIRO", columnNames = {"CODIGO", "ID_PARCEIRO"})
+})
 public class Produto {
 
     @Id
@@ -13,7 +15,7 @@ public class Produto {
     @GeneratedValue(strategy=GenerationType.UUID)
     private String id;
 
-    @Column(name="CODIGO", unique=true, nullable = false)
+    @Column(name="CODIGO", nullable = false)
     private String codigo;
 
     @Column(name="NOME", nullable = false)

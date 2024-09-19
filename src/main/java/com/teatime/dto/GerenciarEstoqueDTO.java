@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class GerenciarEstoqueDTO {
 
+    private String idParceiro;
     private String idProduto;
     private String idProdutoItem;
     private Integer qtd;
@@ -15,6 +16,14 @@ public class GerenciarEstoqueDTO {
 
     private String idUsuarioRecebeu;
     private Long idUnidadeDestino;
+
+    public String getIdParceiro() {
+        return idParceiro;
+    }
+
+    public void setIdParceiro(String idParceiro) {
+        this.idParceiro = idParceiro;
+    }
 
     public Date getDataValidade() {
         return dataValidade;

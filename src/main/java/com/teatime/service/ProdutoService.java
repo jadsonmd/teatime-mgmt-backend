@@ -17,8 +17,6 @@ import java.util.Optional;
 @Service
 public class ProdutoService {
 
-    private static final String ID_PARCEIRO = "santo-antonio";
-
     @Autowired
     private ProdutoRepository produtoRepository;
 
@@ -74,7 +72,7 @@ public class ProdutoService {
                 produtoItem.setQuantidade(produtoItem.getQuantidade() + produtoDTO.getQtd());
                 produtoItem.setPrecoCompra(produtoDTO.getPrecoCompra());
                 produtoItemRepository.save(produtoItem);
-                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(ID_PARCEIRO, produtoItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA));
+                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(produtoDTO.getIdParceiro(), produtoItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA));
             });
 
             return optionalProduto.get();
@@ -95,7 +93,7 @@ public class ProdutoService {
 
         produtoItemRepository.save(prodItem);
 
-        transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(ID_PARCEIRO, prodItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA));
+        transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(produtoDTO.getIdParceiro(), prodItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA));
 
         return optionalProduto.get();
     }
@@ -114,7 +112,7 @@ public class ProdutoService {
                 }
                 produtoItem.setQuantidade(produtoItem.getQuantidade() - produtoDTO.getQtd());
                 produtoItemRepository.save(produtoItem);
-                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(ID_PARCEIRO, produtoItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), "Baixa de estoque", TipoMovimentacao.SAIDA));
+                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(produtoDTO.getIdParceiro(), produtoItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), "Baixa de estoque", TipoMovimentacao.SAIDA));
             });
 
             produto.setEstoque(produto.getEstoque() - produtoDTO.getQtd());
