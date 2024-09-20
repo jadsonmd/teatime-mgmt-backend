@@ -91,4 +91,9 @@ public class ProdutoController {
         return transferenciaEstoqueService.receberStock(receberEstoqueDTO);
     }
 
+    @GetMapping("historico-movimentacao-item/idProdutoItem/{idProdutoItem}")
+    public List<TransferenciaEstoqueDetalhe> getHistoricoMovimentacaoItem(@PathVariable String idProdutoItem) {
+        return transferenciaEstoqueService.getHistoricoMovimentacaoItem(idProdutoItem);
+    }
+
 }

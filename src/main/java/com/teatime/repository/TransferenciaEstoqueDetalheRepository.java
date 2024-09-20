@@ -15,4 +15,11 @@ public interface TransferenciaEstoqueDetalheRepository extends JpaRepository<Tra
             "AND detalhe.idUnidadeOrigem IS NOT NULL " +
             "AND detalhe.idUsuarioRecebeu IS NULL " )
     List<TransferenciaEstoqueDetalhe> findAllTransferenciaStockPendenteRecebimento(@PathVariable("idParceiro")String idParceiro, @PathVariable("tipoMovimentacao") String tipoMovimentacao);
+
+    @Query(value = "FROM TransferenciaEstoqueDetalhe detalhe " +
+            "JOIN detalhe.transferenciaEstoque transf " +
+            "WHERE transf.idProdutoItem = :idProdutoItem " +
+            "ORDER BY detalhe.dataTransferencia desc" )
+    List<TransferenciaEstoqueDetalhe> getHistoricoMovimentacaoItem(@PathVariable("idProdutoItem") String idProdutoItem);
+
 }

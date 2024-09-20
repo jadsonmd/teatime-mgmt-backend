@@ -148,4 +148,8 @@ public class TransferenciaEstoqueService {
     public List<TransferenciaEstoqueDetalhe> getAllTransferenciaStockPendenteRecebimento(String idParceiro) {
         return transferenciaEstoqueDetalheRepository.findAllTransferenciaStockPendenteRecebimento(idParceiro, TipoMovimentacao.SAIDA.name());
     }
+
+    public List<TransferenciaEstoqueDetalhe> getHistoricoMovimentacaoItem(String idProdutoItem) {
+        return transferenciaEstoqueDetalheRepository.getHistoricoMovimentacaoItem(idProdutoItem);
+    }
 }
