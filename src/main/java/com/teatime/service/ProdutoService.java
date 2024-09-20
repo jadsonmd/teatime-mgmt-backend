@@ -26,6 +26,9 @@ public class ProdutoService {
     @Autowired
     private TransferenciaEstoqueService transferenciaEstoqueService;
 
+    private static final String BAIXAR_ESTOQUE = "CONTROLE: Baixar estoque";
+    private static final String INCLUIR_ESTOQUE = "CONTROLE: Incluir estoque";
+
     public Produto createProduto(Produto produto) {
         produto.setEstoque(0);
         return produtoRepository.save(produto);
@@ -72,7 +75,7 @@ public class ProdutoService {
                 produtoItem.setQuantidade(produtoItem.getQuantidade() + produtoDTO.getQtd());
                 produtoItem.setPrecoCompra(produtoDTO.getPrecoCompra());
                 produtoItemRepository.save(produtoItem);
-                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(produtoDTO.getIdParceiro(), produtoItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA));
+                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(produtoDTO.getIdParceiro(), produtoItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), INCLUIR_ESTOQUE, TipoMovimentacao.ENTRADA));
             });
 
             return optionalProduto.get();
@@ -93,7 +96,7 @@ public class ProdutoService {
 
         produtoItemRepository.save(prodItem);
 
-        transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(produtoDTO.getIdParceiro(), prodItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), "Inclusão de estoque", TipoMovimentacao.ENTRADA));
+        transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(produtoDTO.getIdParceiro(), prodItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), INCLUIR_ESTOQUE, TipoMovimentacao.ENTRADA));
 
         return optionalProduto.get();
     }
@@ -112,7 +115,7 @@ public class ProdutoService {
                 }
                 produtoItem.setQuantidade(produtoItem.getQuantidade() - produtoDTO.getQtd());
                 produtoItemRepository.save(produtoItem);
-                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(produtoDTO.getIdParceiro(), produtoItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), "Baixa de estoque", TipoMovimentacao.SAIDA));
+                transferenciaEstoqueService.createTransferenciaEstoque(new TransferenciaEstoqueDTO(produtoDTO.getIdParceiro(), produtoItem.getId(), produtoDTO.getIdUsuarioRecebeu(), produtoDTO.getIdUnidadeDestino(), produtoDTO.getQtd(), BAIXAR_ESTOQUE, TipoMovimentacao.SAIDA));
             });
 
             produto.setEstoque(produto.getEstoque() - produtoDTO.getQtd());
