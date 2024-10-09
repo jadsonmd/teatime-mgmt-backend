@@ -36,7 +36,7 @@ public class ProdutoController {
         return produtoService.getProduto(id);
     }
 
-    @GetMapping("idParceiro/{idParceiro}")
+    @GetMapping("/idParceiro/{idParceiro}")
     public List<Produto> getAllProdutos(@PathVariable String idParceiro) {
         return produtoService.getAllProdutos(idParceiro);
     }

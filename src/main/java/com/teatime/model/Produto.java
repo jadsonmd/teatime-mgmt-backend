@@ -45,6 +45,12 @@ public class Produto {
     @Column(name="ID_ESPECIE_PRODUTO")
     private String idEspecieProduto;
 
+    @Column(name="ID_UNIDADE_MEDIDA")
+    private String idUnidadeMedida;
+
+    @Column(name="ID_FORNECEDOR")
+    private String idFornecedor;
+
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="ID_PARCEIRO", updatable=false, insertable=false, foreignKey = @ForeignKey(name = "FK_PRODUTO_PARCEIRO"))
     private Parceiro parceiro;
@@ -56,6 +62,14 @@ public class Produto {
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="ID_ESPECIE_PRODUTO", updatable=false, insertable=false, foreignKey = @ForeignKey(name = "FK_PRODUTO_ESPECIE_PRODUTO"))
     private EspecieProduto especieProduto;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="ID_FORNECEDOR", updatable=false, insertable=false, foreignKey = @ForeignKey(name = "FK_PRODUTO_FORNECEDOR"))
+    private Fornecedor fornecedor;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="ID_UNIDADE_MEDIDA", updatable=false, insertable=false, foreignKey = @ForeignKey(name = "FK_PRODUTO_UNIDADE_MEDIDA"))
+    private UnidadeMedida unidadeMedida;
 
     public String getCodigo() {
         return codigo;
@@ -167,5 +181,37 @@ public class Produto {
 
     public void setTipoProduto(TipoProduto tipoProduto) {
         this.tipoProduto = tipoProduto;
+    }
+
+    public String getIdUnidadeMedida() {
+        return idUnidadeMedida;
+    }
+
+    public void setIdUnidadeMedida(String idUnidadeMedida) {
+        this.idUnidadeMedida = idUnidadeMedida;
+    }
+
+    public String getIdFornecedor() {
+        return idFornecedor;
+    }
+
+    public void setIdFornecedor(String idFornecedor) {
+        this.idFornecedor = idFornecedor;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    public UnidadeMedida getUnidadeMedida() {
+        return unidadeMedida;
+    }
+
+    public void setUnidadeMedida(UnidadeMedida unidadeMedida) {
+        this.unidadeMedida = unidadeMedida;
     }
 }
