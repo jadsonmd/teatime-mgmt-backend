@@ -23,6 +23,8 @@ public interface ProdutoItemRepository extends JpaRepository<ProdutoItem, String
             " p.estoqueMin as estoqueMin, p.estoqueMax as estoqueMax," +
             " p.estoque as estoque, p.idTipoProduto as idTipoProduto," +
             " p.idEspecieProduto as idEspecieProduto," +
+            " p.idFornecedor as idFornecedor," +
+            " p.idUnidadeMedida as idUnidadeMedida," +
             " pi.id as idProdutoItem, pi.lote as lote," +
             " pi.quantidade as quantidade," +
             " pi.precoCompra as precoCompra," +
