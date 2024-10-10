@@ -35,7 +35,7 @@ public class FornecedorController {
         return new ResponseEntity<>(fornecedores, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<Fornecedor> updateFornecedor(@RequestBody Fornecedor fornecedor) {
         Fornecedor updatedFornecedor = fornecedorService.updateFornecedor(fornecedor);
         return new ResponseEntity<>(updatedFornecedor, HttpStatus.OK);

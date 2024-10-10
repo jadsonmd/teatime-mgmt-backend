@@ -35,7 +35,7 @@ public class UnidadeMedidaController {
         return new ResponseEntity<>(unidadesMedida, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<UnidadeMedida> updateUnidadeMedida(@RequestBody UnidadeMedida unidadeMedida) {
         UnidadeMedida updatedUnidadeMedida = unidadeMedidaService.updateUnidadeMedida(unidadeMedida);
         return new ResponseEntity<>(updatedUnidadeMedida, HttpStatus.OK);
